@@ -1,0 +1,57 @@
+<div class="body">
+    <div class="flex border-solid border-200 flex-wrap align-content-end bg-white h-6rem mb-6 justify-content-between">
+        <div class="logo flex w-10rem align-items-center font-semibold bg-white text-primary-500 underline justify-content-end pb-1 pr-2 ml-3 mb-3 border-circle border-3">Compagny</div>
+        
+        <div class="card">
+            <div class="flex flex-wrap card-container">
+                <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6" (click)="askDate.emit()">Date</button></div>
+                <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6">Random number</button></div>
+                <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6">Less employees</button></div>
+                <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6">More employees</button></div>
+            </div>
+        </div>
+        <div class="w-5rem"></div>
+    </div>
+    <div classs="flex justify-content-around">
+        <p class="font-semibold text-primary-500 px-3 py-3" *ngIf="date != null">Date: {{ date | date: 'short' }}</p>
+        <p class="font-semibold text-primary-500 mb-5 px-3 py-3" *ngIf="date == null"></p>
+    </div>
+    <div class="flex justify-content-around card">
+        
+        <div class="flex flex-column align-items-center card-container">
+            <div class="center justify-content-evenly flex px-8 pt-2 pb-4 flex-column align-items-center border-400 border-1 border-solid border-round-3xl w-30rem h-20rem">
+                <div class="flex ">
+                    <div class="form-example">
+                        <label for="number">Hall n°:  </label>
+                        <input type="number" name="hall" id="hall" pInputText class="p-inputtext-sm w-6" [formControl]="hallForm" (change)="number = 1" required>
+                    </div>
+                    <div class="form-example">
+                        <label for="number">Employees: </label>
+                        <input type="number" name="emp" id="emp" pInputText class="p-inputtext-sm w-6" [formControl]="empForm" required>
+                    </div>
+                </div>
+                <button pButton type="button" class="p-button-text h-5rem pt-3 pl-4 mr-4 font-semibold flex border-solid border-400 border-1 border-noround-bottom h-4rem hover:shadow-4" (click)="onSend()">Send</button>
+            </div>
+        </div>
+        <div class="flex flex-column align-items-center card-container">
+            <div class="center flex pt-2 px-6 flex-column align-items-center border-400 border-1 border-solid border-round-3xl w-30rem h-20rem">
+                <h3 class="font-semibold text-primary-500 px-3 py-3">
+                    Building informations: 
+                </h3>
+                <div class="flex flex-wrap justify-content-evenly">
+                    <div *ngFor="let a of result" class="mb-2">
+                        Hall n°{{ a.hall }} : {{ a.emp }} employee(s)
+                    </div>
+                </div>
+                <button pButton type="button" class="p-button-text h-5rem pt-3 pl-4 mb-2 mt-4 font-semibold border-solid border-400 border-1 border-noround-bottom h-4rem hover:shadow-4" (click)="onPushData(result)">Send data to the graphic</button>
+            </div>
+        </div>
+        <div class="flex flex-column align-items-center card-container">
+            <div class="center flex px-8 pt-2 pb-4 flex-column align-items-center border-400 border-1 border-solid border-round-3xl w-30rem h-20rem">
+                <div class="graph">
+                    <p-chart type="pie" [data]="data"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

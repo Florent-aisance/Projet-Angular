@@ -1,0 +1,29 @@
+.body {
+    background-image: url('/assets/images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    height: 1000px;
+}
+
+.one, .two, .three, .four, .five {
+    font-family: 'Halant', serif;
+    font-size: 16px;
+}
+
+.logo {
+    background: rgb(175,204,255);
+    background: linear-gradient(90deg, rgba(175,204,255,1) 0%, rgba(240,245,255,0.8463760504201681) 50%, rgba(219,232,255,1) 100%);
+    font-family: 'Parisienne', cursive;
+    font-size: 35px;
+};
+
+.nuages {
+    background-image: url('/assets/images/nuages.avif');
+    background-repeat: no-repeat;
+    background-size: 600px;
+    
+}
+
+.center {
+    background-color: rgba(38, 132, 255, 0.2);
+}
