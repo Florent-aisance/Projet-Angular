@@ -1,23 +1,44 @@
-<div class="body">
-    <div class="flex border-solid border-200 flex-wrap align-content-end bg-white h-6rem mb-6 justify-content-between">
+<div class="body flex-column justify-content-center">
+    <div class="flex border-solid border-200 flex-wrap align-content-end bg-white h-6rem justify-content-between">
         <div class="logo flex w-10rem align-items-center font-semibold bg-white text-primary-500 underline justify-content-end pb-1 pr-2 ml-3 mb-3 border-circle border-3">Compagny</div>
-        
         <div class="card">
             <div class="flex flex-wrap card-container">
                 <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6" (click)="askDate.emit()">Date</button></div>
-                <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6">Random number</button></div>
+                <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6" (click)="askTotal()">Random number</button></div>
                 <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6">Less employees</button></div>
                 <div class="h-5rem pt-3 pl-4 mr-3 border-round-3xl border-solid border-noround-bottom border-200 border-1"><button pButton type="button" class="p-button-text font-semibold flex mr-4 border-noround-bottom h-4rem border-round-3xl border-bottom-none border-noround-bottom hover:shadow-6">More employees</button></div>
             </div>
         </div>
         <div class="w-5rem"></div>
     </div>
-    <div classs="flex justify-content-around">
-        <p class="font-semibold text-primary-500 px-3 py-3" *ngIf="date != null">Date: {{ date | date: 'short' }}</p>
-        <p class="font-semibold text-primary-500 mb-5 px-3 py-3" *ngIf="date == null"></p>
+    <div class="flex justify-content-around">
+        <div class="col-2 bg-primary mr-6"></div>
+        <div class="date">
+            <p class="center border-400 border-1 border-solid border-round-3xl font-semibold text-black text-lg px-3 py-3" *ngIf="date != null">Date: {{ date | date: 'short' }}</p>
+            <p class="mb-5 px-3 py-3" *ngIf="date == null"></p>
+        </div>
+        <div class="formgroup-inline center border-400 border-1 border-solid border-round-3xl font-semibold text-black text-lg px-3 py-3 align-self-center" id="colorForm">
+            <div class="field-radiobutton">
+                <button pButton type="button" id="colorRed" class="p-button-outlined p-button-rounded text-red-500 pr-3" *ngIf="redB == 0" (click)="onSendColor('red'); redB = 1">R</button>
+                <button pButton type="button" id="colorRed" class="p-button-raised p-button-rounded border-900 text-color bg-red-500 pr-3" *ngIf="redB == 1" (click)="onRemColor('red'); redB = 0">R</button>
+            </div>
+            <div class="field-radiobutton">
+                <button pButton type="button" id="colorBlue" class="p-button-outlined p-button-rounded text-primary-500 pr-3" *ngIf="blueB == 0" (click)="onSendColor('blue'); blueB = 1">B</button>
+                <button pButton type="button" id="colorBlue" class="p-button-raised p-button-rounded border-900 text-color bg-primary-500 pr-3" *ngIf="blueB == 1" (click)="onRemColor('blue'); blueB = 0">B</button>
+            </div>
+            <div class="field-radiobutton">
+                <button pButton type="button" id="colorGreen" class="p-button-outlined p-button-rounded text-green-500 pr-3" *ngIf="greenB == 0" (click)="onSendColor('green'); greenB = 1">G</button>
+                <button pButton type="button" id="colorGreen" class="p-button-raised p-button-rounded border-900 text-color bg-green-500 pr-3" *ngIf="greenB == 1" (click)="onRemColor('green'); greenB = 0">G</button>
+            </div>
+            <div class="field-radiobutton">
+                <button pButton type="button" id="colorYellow" class="p-button-outlined p-button-rounded text-yellow-500 pr-3" *ngIf="yellowB == 0" (click)="onSendColor('yellow'); yellowB = 1">Y</button>
+                <button pButton type="button" id="colorYellow" class="p-button-raised p-button-rounded border-900 text-color bg-yellow-500 pr-3" *ngIf="yellowB == 1" (click)="onRemColor('yellow'); yellowB = 0">Y</button>
+            </div>
+            <button pButton type="button" class="p-button-text h-5rem pt-3 pl-4 mb-2 mt-4 font-semibold border-solid border-400 border-1 border-noround-bottom h-4rem hover:shadow-4" (click)="askColors.emit(); onColorGraph(colors)">Confirm</button>
+        </div>
     </div>
+    
     <div class="flex justify-content-around card">
-        
         <div class="flex flex-column align-items-center card-container">
             <div class="center justify-content-evenly flex px-8 pt-2 pb-4 flex-column align-items-center border-400 border-1 border-solid border-round-3xl w-30rem h-20rem">
                 <div class="flex ">
@@ -38,18 +59,18 @@
                 <h3 class="font-semibold text-primary-500 px-3 py-3">
                     Building informations: 
                 </h3>
-                <div class="flex flex-wrap justify-content-evenly">
-                    <div *ngFor="let a of result" class="mb-2">
+                <div class="flex flex-wrap justify-content-evenly w-12">
+                    <div *ngFor="let a of result" class="mb-2 ">
                         Hall n°{{ a.hall }} : {{ a.emp }} employee(s)
                     </div>
                 </div>
-                <button pButton type="button" class="p-button-text h-5rem pt-3 pl-4 mb-2 mt-4 font-semibold border-solid border-400 border-1 border-noround-bottom h-4rem hover:shadow-4" (click)="onPushData(result)">Send data to the graphic</button>
+                <button pButton type="button" class="p-button-text h-5rem pt-3 pl-4 mb-2 mt-4 font-semibold border-solid border-400 border-1 border-noround-bottom h-4rem hover:shadow-4" (click)="onPushData(graph)">Send data to the graphic</button>
             </div>
         </div>
         <div class="flex flex-column align-items-center card-container">
             <div class="center flex px-8 pt-2 pb-4 flex-column align-items-center border-400 border-1 border-solid border-round-3xl w-30rem h-20rem">
                 <div class="graph">
-                    <p-chart type="pie" [data]="data"></p-chart>
+                    <p-chart #graph type="pie" [data]="data"></p-chart>
                 </div>
             </div>
         </div>

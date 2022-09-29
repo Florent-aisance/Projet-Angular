@@ -6,21 +6,37 @@ import { formData } from "src/app/model/formData";
 
 export interface IApp {
     date:Date|null,
-    temp:formData[]
+    temp:formData[],
+    colors: {}[]
 }
 
 export const initialApp:IApp = {
     date:null,
-    temp: []
+    temp: [],
+    colors: []
 }
 
 export class AskDate {
     static readonly type = "askDate"
 }
 
+export class AskColors {
+    static readonly type = "askColors"
+}
+
 export class DefEmp {
     static readonly type = "DefEmp"
     constructor(public Object: formData ) {}
+}
+
+export class SendColor {
+    static readonly type = "SendColor"
+    constructor(public Color: String ) {}
+}
+
+export class RemColor {
+    static readonly type = "RemColor"
+    constructor(public Color: String ) {}
 }
 
 @State<IApp>({name:'appstate', defaults:initialApp})
@@ -31,6 +47,11 @@ export class AppState {
     @Selector()
     static selectDate(state:IApp) {
         return state.date
+    }
+
+    @Selector()
+    static selectColors(state:IApp) {
+        return state.colors
     }
 
     @Selector()
@@ -50,6 +71,28 @@ export class AppState {
         var newTemp = state.temp.slice()
         newTemp.push( Object )
         ctx.patchState({ temp: newTemp })
+    }
+
+    @Action( SendColor )
+    async sendColor( ctx:StateContext<IApp>, {Color}:SendColor ) {
+
+        var state = ctx.getState()
+        var newColors = state.colors.slice()
+        newColors.push( Color )
+        ctx.patchState({ colors:newColors })
+        
+    }
+
+    @Action( RemColor )
+    async remColor( ctx:StateContext<IApp>, {Color}:RemColor ) {
+
+        var stateColors = ctx.getState().colors
+        var index = stateColors.indexOf(Color)
+        if ( index !== -1) {
+            stateColors.splice(index, 1)
+        }
+        ctx.patchState({ colors:stateColors })
+        
     }
     
     constructor(private service:TimeService) {}
